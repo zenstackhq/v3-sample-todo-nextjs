@@ -2,8 +2,6 @@
 
 import { SpaceUserRole } from '@/zenstack/models';
 import { schema } from '@/zenstack/schema-lite';
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useClientQueries } from '@zenstackhq/tanstack-query/react';
 import WithNavBar from 'components/WithNavBar';
 import { NextPage } from 'next';

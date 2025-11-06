@@ -10,11 +10,7 @@ export const db = new ZenStackClient(schema, {
             connectionString: process.env.DATABASE_URL,
         }),
     }),
-    log: (event) => {
-        if (event.level === 'error') {
-            console.error(event.error);
-        }
-    },
+    log: ['query', 'error'],
 });
 
 export const authDb = db.$use(new PolicyPlugin());

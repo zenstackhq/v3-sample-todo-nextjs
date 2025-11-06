@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { signup } from '@/server/signup';
@@ -15,20 +13,9 @@ export default function Signup() {
 
     async function onSignup(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        try {
-            await signup({ email, password });
-        } catch (err: any) {
-            console.error(err);
-            // if (err.info?.prisma === true) {
-            //     if (err.info.code === 'P2002') {
-            //         toast.error('User already exists');
-            //     } else {
-            //         toast.error(`Unexpected Prisma error: ${err.info.code}`);
-            //     }
-            // } else {
-            //     toast.error(`Error occurred: ${JSON.stringify(err)}`);
-            // }
-            toast.error(`Error occurred: ${JSON.stringify(err)}`);
+        const { error } = await signup({ email, password });
+        if (error) {
+            toast.error(error.message);
             return;
         }
 

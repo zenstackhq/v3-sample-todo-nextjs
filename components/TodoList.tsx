@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Avatar from './Avatar';
 import TimeInfo from './TimeInfo';
+import { toast } from 'react-toastify';
 
 type Props = {
     value: List & { owner: User };
@@ -24,7 +25,15 @@ export default function TodoList({ value }: Props) {
 
     const onDelete = () => {
         if (confirm('Are you sure to delete this list?')) {
-            deleteList({ where: { id: value.id } });
+            deleteList(
+                { where: { id: value.id } },
+                {
+                    onError(error) {
+                        console.error('Failed to delete:', error);
+                        toast.error('Unable to delete list');
+                    },
+                }
+            );
         }
     };
 

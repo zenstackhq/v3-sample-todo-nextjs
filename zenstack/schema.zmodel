@@ -99,11 +99,8 @@ model User {
     // next-auth
     accounts      Account[]
 
-    // can be created by anyone, even not logged in
-    @@allow('create', true)
-
-    // can be read by users sharing any space
-    @@allow('read', memberships?[space.members?[user == auth()]])
+    // profiles are readable to all signed-in users
+    @@allow('read', auth() != null)
 
     // full access by oneself
     @@allow('all', auth() == this)
@@ -133,14 +130,14 @@ model List {
     // when create, owner must be set to current user, and user must be in the space
     @@allow('create', owner == auth() && space.members?[user == auth()])
 
-    // to update, current user must be the owner and in the space
-    @@allow('update', owner == auth() && space.members?[user == auth()])
+    // owner can update or delete
+    @@allow('update,delete', owner == auth())
+
+    // space admin can update or delete
+    @@allow('update,delete', space.members?[user == auth() && role == ADMIN])
 
     // update is not allowed to change owner
     @@deny('post-update', ownerId != before().ownerId)
-
-    // can be deleted by owner
-    @@allow('delete', owner == auth())
 }
 
 /*

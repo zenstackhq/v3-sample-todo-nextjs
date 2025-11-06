@@ -232,8 +232,7 @@ export const schema = {
                 }
             },
             attributes: [
-                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("create") }, { name: "condition", value: ExpressionUtils.literal(true) }] },
-                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("memberships"), "?", ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.field("space"), ["members"]), "?", ExpressionUtils.binary(ExpressionUtils.field("user"), "==", ExpressionUtils.call("auth")))) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.call("auth"), "!=", ExpressionUtils._null()) }] },
                 { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("all") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.call("auth"), "==", ExpressionUtils._this()) }] }
             ],
             idFields: ["id"],
@@ -314,9 +313,9 @@ export const schema = {
                 { name: "@@deny", args: [{ name: "operation", value: ExpressionUtils.literal("all") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.call("auth"), "==", ExpressionUtils._null()) }] },
                 { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("read") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.binary(ExpressionUtils.field("owner"), "==", ExpressionUtils.call("auth")), "||", ExpressionUtils.binary(ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.field("space"), ["members"]), "?", ExpressionUtils.binary(ExpressionUtils.field("user"), "==", ExpressionUtils.call("auth"))), "&&", ExpressionUtils.unary("!", ExpressionUtils.field("private")))) }] },
                 { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("create") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.binary(ExpressionUtils.field("owner"), "==", ExpressionUtils.call("auth")), "&&", ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.field("space"), ["members"]), "?", ExpressionUtils.binary(ExpressionUtils.field("user"), "==", ExpressionUtils.call("auth")))) }] },
-                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("update") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.binary(ExpressionUtils.field("owner"), "==", ExpressionUtils.call("auth")), "&&", ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.field("space"), ["members"]), "?", ExpressionUtils.binary(ExpressionUtils.field("user"), "==", ExpressionUtils.call("auth")))) }] },
-                { name: "@@deny", args: [{ name: "operation", value: ExpressionUtils.literal("post-update") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("ownerId"), "!=", ExpressionUtils.member(ExpressionUtils.call("before"), ["ownerId"])) }] },
-                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("delete") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("owner"), "==", ExpressionUtils.call("auth")) }] }
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("update,delete") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("owner"), "==", ExpressionUtils.call("auth")) }] },
+                { name: "@@allow", args: [{ name: "operation", value: ExpressionUtils.literal("update,delete") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.member(ExpressionUtils.field("space"), ["members"]), "?", ExpressionUtils.binary(ExpressionUtils.binary(ExpressionUtils.field("user"), "==", ExpressionUtils.call("auth")), "&&", ExpressionUtils.binary(ExpressionUtils.field("role"), "==", ExpressionUtils.literal("ADMIN")))) }] },
+                { name: "@@deny", args: [{ name: "operation", value: ExpressionUtils.literal("post-update") }, { name: "condition", value: ExpressionUtils.binary(ExpressionUtils.field("ownerId"), "!=", ExpressionUtils.member(ExpressionUtils.call("before"), ["ownerId"])) }] }
             ],
             idFields: ["id"],
             uniqueFields: {

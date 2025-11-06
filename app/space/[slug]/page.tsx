@@ -2,8 +2,6 @@
 
 import { schema } from '@/zenstack/schema-lite';
 import { useClientQueries } from '@zenstackhq/tanstack-query/react';
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import BreadCrumb from 'components/BreadCrumb';
 import SpaceMembers from 'components/SpaceMembers';
 import TodoList from 'components/TodoList';
