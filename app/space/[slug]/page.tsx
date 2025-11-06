@@ -31,9 +31,7 @@ function CreateDialog() {
                 data: {
                     title,
                     private: _private,
-                    // fix
-                    // space: { connect: { id: space!.id } },
-                    spaceId: space!.id,
+                    space: { connect: { id: space!.id } },
                 },
             });
         } catch (err: any) {

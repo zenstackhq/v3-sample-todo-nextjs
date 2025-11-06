@@ -46,4 +46,4 @@ See a live deployment at: https://v3-sample-todo-nextjs.vercel.app/.
     npm run dev
     ```
 
-For more information on using ZenStack, visit [https://zenstack.dev](https://zenstack.dev/v3).
+For more information on using ZenStack, visit [https://zenstack.dev/v3](https://zenstack.dev/v3).

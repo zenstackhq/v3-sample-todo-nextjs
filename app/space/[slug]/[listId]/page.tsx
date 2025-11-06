@@ -37,9 +37,7 @@ export default function TodoList() {
         createTodo({
             data: {
                 title,
-                // fix
-                // list: { connect: { id: params.listId } },
-                listId: params.listId,
+                list: { connect: { id: params.listId } },
             },
         });
     };
