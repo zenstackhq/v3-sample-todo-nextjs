@@ -1,12 +1,10 @@
-# A Collaborative Todo Sample - ZenStack + Next.js
+# A Collaborative Todo Sample - ZenStack v3 + Next.js + TanStack Query
 
-This project is a collaborative todo app built with [Next.js](https://nextjs.org) (app router), [Auth.js](https://authjs.dev/), and [ZenStack](https://zenstack.dev).
-
-> See the [pages-route](https://github.com/zenstackhq/sample-todo-nextjs-tanstack/tree/pages-route) branch for an implementation using Next.js's old pages router.
+This project is a collaborative todo app built with [Next.js](https://nextjs.org), [Auth.js](https://authjs.dev/), [TanStack Query](https://tanstack.com/query), and [ZenStack v3](https://zenstack.dev/v3).
 
 In this fictitious app, users can be invited to workspaces where they can collaborate on todos. Public todo lists are visible to all members in the workspace.
 
-See a live deployment at: https://zenstack-todo.vercel.app/.
+See a live deployment at: https://v3-sample-todo-nextjs.vercel.app/.
 
 ## Features:
 
@@ -48,4 +46,4 @@ See a live deployment at: https://zenstack-todo.vercel.app/.
     npm run dev
     ```
 
-For more information on using ZenStack, visit [https://zenstack.dev](https://zenstack.dev).
+For more information on using ZenStack, visit [https://zenstack.dev](https://zenstack.dev/v3).
