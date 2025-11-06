@@ -8,9 +8,7 @@ const nextConfig = {
             { hostname: 'avatars.githubusercontent.com' },
         ],
     },
-    experimental: {
-        serverExternalPackages: ['pg'],
-    },
+    serverExternalPackages: ['pg'],
 };
 
 export default nextConfig;
