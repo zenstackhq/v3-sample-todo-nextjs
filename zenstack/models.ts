@@ -13,5 +13,5 @@ export type User = $ModelResult<$Schema, "User">;
 export type List = $ModelResult<$Schema, "List">;
 export type Todo = $ModelResult<$Schema, "Todo">;
 export type Account = $ModelResult<$Schema, "Account">;
-export const SpaceUserRole = $schema.enums.SpaceUserRole;
+export const SpaceUserRole = $schema.enums.SpaceUserRole.values;
 export type SpaceUserRole = (typeof SpaceUserRole)[keyof typeof SpaceUserRole];

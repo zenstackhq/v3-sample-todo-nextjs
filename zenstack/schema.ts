@@ -482,8 +482,10 @@ export const schema = {
     },
     enums: {
         SpaceUserRole: {
-            USER: "USER",
-            ADMIN: "ADMIN"
+            values: {
+                USER: "USER",
+                ADMIN: "ADMIN"
+            }
         }
     },
     authType: "User",
