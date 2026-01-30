@@ -14,8 +14,8 @@
         "generate": "zen generate --lite",
         "vercel-build": "npm run build && npm run db:deploy",
         "package-clean": "npm rm zenstack @zenstackhq/orm @zenstackhq/server @zenstackhq/tanstack-query @zenstackhq/plugin-policy",
-        "up": "npm run package-clean && npm install -D @zenstackhq/cli@latest && npm install @zenstackhq/orm@latest @zenstackhq/server@latest @zenstackhq/tanstack-query@latest @zenstackhq/plugin-policy@latest",
-        "up-preview": "npm run package-clean && npm install --registry https://preview.registry.zenstack.dev -D @zenstackhq/cli@latest && npm install --registry https://preview.registry.zenstack.dev @zenstackhq/orm@latest @zenstackhq/server@latest @zenstackhq/tanstack-query@latest @zenstackhq/plugin-policy@latest"
+        "up": "npm install @zenstackhq/cli@latest @zenstackhq/orm@latest @zenstackhq/server@latest @zenstackhq/tanstack-query@latest @zenstackhq/plugin-policy@latest",
+        "up-canary": "npm install @zenstackhq/cli@canary @zenstackhq/orm@canary @zenstackhq/server@canary @zenstackhq/tanstack-query@canary @zenstackhq/plugin-policy@canary"
     },
     "dependencies": {
         "@auth/prisma-adapter": "^2.7.4",
