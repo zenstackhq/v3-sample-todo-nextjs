@@ -413,6 +413,7 @@ export class SchemaType implements SchemaDef {
     } as const;
     enums = {
         SpaceUserRole: {
+            name: "SpaceUserRole",
             values: {
                 USER: "USER",
                 ADMIN: "ADMIN"
