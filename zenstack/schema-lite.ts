@@ -5,7 +5,7 @@
 
 /* eslint-disable */
 
-import { type SchemaDef, type FieldDefault, ExpressionUtils } from "@zenstackhq/schema";
+import { type SchemaDef, type AttributeApplication, type FieldDefault, ExpressionUtils } from "@zenstackhq/schema";
 export class SchemaType implements SchemaDef {
     provider = {
         type: "postgresql"
@@ -18,17 +18,20 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 createdAt: {
                     name: "createdAt",
                     type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
                 updatedAt: {
                     name: "updatedAt",
                     type: "DateTime",
-                    updatedAt: true
+                    updatedAt: true,
+                    attributes: [{ name: "@updatedAt" }] as readonly AttributeApplication[]
                 },
                 owner: {
                     name: "owner",
@@ -38,6 +41,7 @@ export class SchemaType implements SchemaDef {
                 ownerId: {
                     name: "ownerId",
                     type: "String",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) as FieldDefault,
                     foreignKeyFor: [
                         "owner"
@@ -45,12 +49,14 @@ export class SchemaType implements SchemaDef {
                 },
                 name: {
                     name: "name",
-                    type: "String"
+                    type: "String",
+                    attributes: [{ name: "@length", args: [{ name: "min", value: ExpressionUtils.literal(4) }, { name: "max", value: ExpressionUtils.literal(50) }] }] as readonly AttributeApplication[]
                 },
                 slug: {
                     name: "slug",
                     type: "String",
-                    unique: true
+                    unique: true,
+                    attributes: [{ name: "@regex", args: [{ name: "regex", value: ExpressionUtils.literal("^[0-9a-zA-Z]{4,16}$") }] }] as readonly AttributeApplication[]
                 },
                 members: {
                     name: "members",
@@ -78,17 +84,20 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 createdAt: {
                     name: "createdAt",
                     type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
                 updatedAt: {
                     name: "updatedAt",
                     type: "DateTime",
-                    updatedAt: true
+                    updatedAt: true,
+                    attributes: [{ name: "@updatedAt" }] as readonly AttributeApplication[]
                 },
                 space: {
                     name: "space",
@@ -132,22 +141,26 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 createdAt: {
                     name: "createdAt",
                     type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
                 updatedAt: {
                     name: "updatedAt",
                     type: "DateTime",
-                    updatedAt: true
+                    updatedAt: true,
+                    attributes: [{ name: "@updatedAt" }] as readonly AttributeApplication[]
                 },
                 email: {
                     name: "email",
                     type: "String",
-                    unique: true
+                    unique: true,
+                    attributes: [{ name: "@email" }] as readonly AttributeApplication[]
                 },
                 emailVerified: {
                     name: "emailVerified",
@@ -179,7 +192,8 @@ export class SchemaType implements SchemaDef {
                 image: {
                     name: "image",
                     type: "String",
-                    optional: true
+                    optional: true,
+                    attributes: [{ name: "@url" }] as readonly AttributeApplication[]
                 },
                 lists: {
                     name: "lists",
@@ -213,17 +227,20 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 createdAt: {
                     name: "createdAt",
                     type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
                 updatedAt: {
                     name: "updatedAt",
                     type: "DateTime",
-                    updatedAt: true
+                    updatedAt: true,
+                    attributes: [{ name: "@updatedAt" }] as readonly AttributeApplication[]
                 },
                 space: {
                     name: "space",
@@ -245,6 +262,7 @@ export class SchemaType implements SchemaDef {
                 ownerId: {
                     name: "ownerId",
                     type: "String",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) as FieldDefault,
                     foreignKeyFor: [
                         "owner"
@@ -252,11 +270,13 @@ export class SchemaType implements SchemaDef {
                 },
                 title: {
                     name: "title",
-                    type: "String"
+                    type: "String",
+                    attributes: [{ name: "@length", args: [{ name: "min", value: ExpressionUtils.literal(1) }, { name: "max", value: ExpressionUtils.literal(100) }] }] as readonly AttributeApplication[]
                 },
                 private: {
                     name: "private",
                     type: "Boolean",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.literal(false) }] }] as readonly AttributeApplication[],
                     default: false as FieldDefault
                 },
                 todos: {
@@ -278,17 +298,20 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 createdAt: {
                     name: "createdAt",
                     type: "DateTime",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("now") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("now") as FieldDefault
                 },
                 updatedAt: {
                     name: "updatedAt",
                     type: "DateTime",
-                    updatedAt: true
+                    updatedAt: true,
+                    attributes: [{ name: "@updatedAt" }] as readonly AttributeApplication[]
                 },
                 owner: {
                     name: "owner",
@@ -298,6 +321,7 @@ export class SchemaType implements SchemaDef {
                 ownerId: {
                     name: "ownerId",
                     type: "String",
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.member(ExpressionUtils.call("auth"), ["id"]) as FieldDefault,
                     foreignKeyFor: [
                         "owner"
@@ -317,7 +341,8 @@ export class SchemaType implements SchemaDef {
                 },
                 title: {
                     name: "title",
-                    type: "String"
+                    type: "String",
+                    attributes: [{ name: "@length", args: [{ name: "min", value: ExpressionUtils.literal(1) }, { name: "max", value: ExpressionUtils.literal(100) }] }] as readonly AttributeApplication[]
                 },
                 completedAt: {
                     name: "completedAt",
@@ -337,6 +362,7 @@ export class SchemaType implements SchemaDef {
                     name: "id",
                     type: "String",
                     id: true,
+                    attributes: [{ name: "@default", args: [{ name: "value", value: ExpressionUtils.call("uuid") }] }] as readonly AttributeApplication[],
                     default: ExpressionUtils.call("uuid") as FieldDefault
                 },
                 userId: {
